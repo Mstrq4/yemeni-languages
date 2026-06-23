@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --font-almarai: var(--font-almarai);
-  --font-amiri: var(--font-amiri);
+  --font-sans: "Cairo", system-ui, sans-serif;
+  --font-serif: "Amiri", serif;
 }
 
 body {
   direction: rtl;
 }
 
+/* Particle / star animation */
 @keyframes particle-fall {
   0% {
     transform: translateY(-100%) translateX(0) rotate(0deg);
@@ -26,10 +27,19 @@ body {
   }
 }
 
-.star-dark {
-  background: radial-gradient(circle, rgba(254, 215, 184, 0.9) 0%, rgba(254, 215, 184, 0) 70%);
+/* Star colors — light mode uses amber, dark mode uses warm cream */
+.star-light {
+  background: radial-gradient(
+    circle,
+    rgba(245, 158, 11, 0.7) 0%,
+    rgba(245, 158, 11, 0) 70%
+  );
 }
 
-.star-light {
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.7) 0%, rgba(245, 158, 11, 0) 70%);
+.star-dark {
+  background: radial-gradient(
+    circle,
+    rgba(254, 215, 184, 0.9) 0%,
+    rgba(254, 215, 184, 0) 70%
+  );
 }

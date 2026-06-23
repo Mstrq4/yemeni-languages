@@ -1,28 +1,25 @@
 import type { Metadata } from "next";
-import { Almarai, Amiri } from "next/font/google";
+
+// Local fonts via @fontsource — no CDN, no next/font/google
+import "@fontsource/cairo/400.css";
+import "@fontsource/cairo/600.css";
+import "@fontsource/cairo/700.css";
+import "@fontsource/cairo/800.css";
+import "@fontsource/amiri/400.css";
+import "@fontsource/amiri/700.css";
+
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const almarai = Almarai({
-  variable: "--font-almarai",
-  subsets: ["arabic"],
-  weight: ["400", "700", "800"],
-  display: "swap",
-});
-
-const amiri = Amiri({
-  variable: "--font-amiri",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "اللغات اليمنية القديمة | Ancient Yemeni Languages",
+  title: "لغات يمنية | Ancient Yemeni Languages",
   description:
     "منصة تعليمية عن اللغة اليمنية القديمة وخط المسند — تعلّم الحروف والكلمات والنقوش الأصلية",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -34,10 +31,10 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${almarai.variable} ${amiri.variable} h-full antialiased`}
+      className="h-full antialiased"
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-stone-50 dark:bg-[#030712] font-almarai">
+      <body className="min-h-full flex flex-col bg-stone-50 dark:bg-[#030712] font-sans text-stone-900 dark:text-stone-50 transition-colors duration-300">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
