@@ -1,229 +1,139 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Type,
-  BookOpen,
-  AlignRight,
-  ChevronRight,
-  ChevronLeft,
-  Layers,
-} from "lucide-react";
+import { BookOpen, Pen, Repeat, ChevronLeft, ChevronRight } from "lucide-react";
 import FlipCard from "./FlipCard";
-import {
-  musnadLetters,
-  musnadWords,
-  musnadSentences,
-  letterGroups,
-  type MusnadLetter,
-  type MusnadWord,
-  type MusnadSentence,
-} from "@/lib/data";
+import { musnadLetters, letterGroups, musnadWords, musnadSentences } from "@/lib/data";
 
 type Mode = "letters" | "words" | "sentences";
 
-const modes: { id: Mode; label: string; icon: typeof Type }[] = [
-  { id: "letters", label: "الحروف", icon: Type },
-  { id: "words", label: "الكلمات", icon: BookOpen },
-  { id: "sentences", label: "الجمل", icon: AlignRight },
-];
-
-const ITEMS_PER_PAGE = 12;
-
 export default function LessonClient() {
   const [mode, setMode] = useState<Mode>("letters");
+  const [group, setGroup] = useState<string>("أساسية");
   const [page, setPage] = useState(0);
-  const [letterGroup, setLetterGroup] = useState<string | null>(null);
 
-  // Filter letters by group
-  const filteredLetters = useMemo(() => {
-    if (!letterGroup) return musnadLetters;
-    return musnadLetters.filter((l) => l.group === letterGroup);
-  }, [letterGroup]);
+  const perPage = mode === "letters" ? 12 : mode === "words" ? 12 : 4;
 
-  // Get current data as union array
-  const currentData = useMemo(() => {
-    if (mode === "letters") return filteredLetters;
-    if (mode === "words") return musnadWords;
-    return musnadSentences;
-  }, [mode, filteredLetters]);
+  const items: any[] =
+    mode === "letters"
+      ? musnadLetters.filter((l: any) => (l as any).group === group)
+      : mode === "words"
+      ? musnadWords as any[]
+      : musnadSentences as any[];
 
-  // Paginate
-  const totalPages = Math.ceil(currentData.length / ITEMS_PER_PAGE);
-  const currentPage = Math.min(page, totalPages - 1);
-  const paginatedData = currentData.slice(
-    currentPage * ITEMS_PER_PAGE,
-    (currentPage + 1) * ITEMS_PER_PAGE
-  );
+  const totalPages = Math.ceil(items.length / perPage);
+  const current = items.slice(page * perPage, (page + 1) * perPage);
 
-  const handleModeChange = (newMode: Mode) => {
-    setMode(newMode);
-    setLetterGroup(null);
-    setPage(0);
-  };
-
-  const handleGroupChange = (group: string | null) => {
-    setLetterGroup(group);
-    setPage(0);
-  };
-
-  const inactiveTab =
-    "bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 text-stone-600 dark:text-stone-300 hover:border-amber-500";
-
-  const activeTab = "bg-amber-500 text-white";
+  const modes = [
+    { key: "letters" as Mode, label: "الحروف", icon: BookOpen },
+    { key: "words" as Mode, label: "الكلمات", icon: Pen },
+    { key: "sentences" as Mode, label: "الجمل", icon: Repeat },
+  ];
 
   return (
-    <div className="min-h-screen bg-stone-50 dark:bg-[#030712] pt-16 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-stone-50 dark:bg-[#030712] pt-16 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-10">
-          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
             <span className="bg-gradient-to-l from-amber-400 to-amber-600 bg-clip-text text-transparent">
-              الدرس الأول: حروف المسند
+              تعلم الخط المسند
             </span>
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-stone-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed">
-            تعلّم حروف المسند بالبطاقات القابلة للقلب — اقرأ الحرف بالمسند ثم اضغط
-            للتحقق من قراءتك
+          <p className="text-sm text-stone-600 dark:text-stone-300">
+            اضغط على البطاقة لترى المقابل بالعربية
           </p>
         </div>
 
-        {/* Mode tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+        {/* Mode Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {modes.map((m) => {
             const Icon = m.icon;
-            const isActive = mode === m.id;
             return (
               <button
-                key={m.id}
-                onClick={() => handleModeChange(m.id)}
-                className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${
-                  isActive ? activeTab : inactiveTab
+                key={m.key}
+                onClick={() => { setMode(m.key); setPage(0); }}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors ${
+                  mode === m.key
+                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20"
+                    : "bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 text-stone-600 dark:text-stone-300 hover:border-amber-500"
                 }`}
               >
-                <Icon className="h-4 w-4 shrink-0" />
+                <Icon className="h-4 w-4" />
                 {m.label}
               </button>
             );
           })}
         </div>
 
-        {/* Letter group filter (only for letters mode) */}
+        {/* Letter Groups */}
         {mode === "letters" && (
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8">
-            <button
-              onClick={() => handleGroupChange(null)}
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium transition-colors ${
-                !letterGroup ? activeTab : inactiveTab
-              }`}
-            >
-              <Layers className="h-3.5 w-3.5 shrink-0" />
-              الكل
-            </button>
-            {Object.entries(letterGroups).map(([key, label]) => (
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            {Object.keys(letterGroups).map((g) => (
               <button
-                key={key}
-                onClick={() => handleGroupChange(key)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium transition-colors ${
-                  letterGroup === key ? activeTab : inactiveTab
+                key={g}
+                onClick={() => { setGroup(g); setPage(0); }}
+                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                  group === g
+                    ? "bg-amber-500 text-white"
+                    : "bg-stone-100 dark:bg-white/5 border border-stone-200 dark:border-white/10 text-stone-600 dark:text-stone-300 hover:border-amber-500"
                 }`}
               >
-                {label}
-                <span className="mr-1.5 text-stone-400 dark:text-stone-500">
-                  ({musnadLetters.filter((l) => l.group === key).length})
-                </span>
+                {g}
               </button>
             ))}
           </div>
         )}
 
-        {/* Cards grid — responsive: 2 cols mobile, 3 sm, 4 md, 6 lg */}
+        {/* Cards Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${mode}-${letterGroup}-${currentPage}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mb-8"
+            key={`${mode}-${group}-${page}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className={`grid gap-3 sm:gap-4 ${
+              mode === "sentences"
+                ? "grid-cols-1 sm:grid-cols-2"
+                : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+            }`}
           >
-            {paginatedData.map((item, idx) => {
-              if (mode === "letters") {
-                const letter = item as MusnadLetter;
-                return (
-                  <FlipCard
-                    key={`${mode}-${idx}`}
-                    front={letter.musnad}
-                    back={letter.arabic}
-                  />
-                );
-              }
-              if (mode === "words") {
-                const word = item as MusnadWord;
-                return (
-                  <FlipCard
-                    key={`${mode}-${idx}`}
-                    front={word.musnad}
-                    back={word.arabic}
-                    subBack={word.meaning}
-                  />
-                );
-              }
-              const sentence = item as MusnadSentence;
-              return (
-                <div
-                  key={`${mode}-${idx}`}
-                  className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-6"
-                >
-                  <FlipCard
-                    front={sentence.musnad}
-                    back={sentence.arabic}
-                    subBack={sentence.source}
-                  />
-                </div>
-              );
-            })}
+            {current.map((item: any, i: number) => (
+              <FlipCard
+                key={i}
+                front={item.musnad}
+                back={item.arabic}
+                subBack={item.meaning || item.source}
+                frontSize={mode === "sentences" ? "text-xl sm:text-2xl md:text-3xl" : "text-5xl sm:text-6xl"}
+                backSize={mode === "sentences" ? "text-base sm:text-lg" : "text-2xl sm:text-3xl"}
+                wide={mode === "sentences"}
+              />
+            ))}
           </motion.div>
         </AnimatePresence>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 sm:gap-4">
+          <div className="mt-8 flex items-center justify-center gap-4">
             <button
-              onClick={() => setPage(Math.max(0, currentPage - 1))}
-              disabled={currentPage === 0}
-              className={`inline-flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${inactiveTab}`}
+              onClick={() => setPage(Math.max(0, page - 1))}
+              disabled={page === 0}
+              className="p-2 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 text-stone-600 dark:text-stone-300 hover:border-amber-500 transition-colors disabled:opacity-30"
             >
-              <ChevronRight className="h-4 w-4" />
-              السابق
+              <ChevronRight className="h-5 w-5" />
             </button>
-
-            <span className="text-xs sm:text-sm text-stone-500 dark:text-stone-400">
-              صفحة {currentPage + 1} من {totalPages}
-            </span>
-
+            <span className="text-sm text-stone-500 dark:text-stone-400">{page + 1} / {totalPages}</span>
             <button
-              onClick={() => setPage(Math.min(totalPages - 1, currentPage + 1))}
-              disabled={currentPage === totalPages - 1}
-              className={`inline-flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${inactiveTab}`}
+              onClick={() => setPage(Math.min(totalPages - 1, page + 1))}
+              disabled={page === totalPages - 1}
+              className="p-2 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 text-stone-600 dark:text-stone-300 hover:border-amber-500 transition-colors disabled:opacity-30"
             >
-              التالي
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
           </div>
         )}
-
-        {/* Info note */}
-        <div className="mt-10 sm:mt-12 max-w-2xl mx-auto">
-          <div className="rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 p-4 sm:p-5 shadow-sm">
-            <p className="text-xs text-stone-500 dark:text-stone-400 leading-relaxed text-center">
-              <span className="font-bold text-amber-600 dark:text-amber-500">طريقة الاستخدام:</span>{" "}
-              اقرأ الحرف أو الكلمة بالمسند من الواجهة الأمامية، ثم اضغط على البطاقة
-              لقلبها والتحقق من قراءتك الصحيحة بالعربية
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

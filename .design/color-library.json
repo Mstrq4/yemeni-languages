@@ -1,0 +1,251 @@
+{
+  "primary": {
+    "Gold & Crimson": {
+      "source": "img_16f808ab2c04.jpg",
+      "category": "دافئ (Warm)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#59171B",
+        "#FED7B8"
+      ],
+      "description": "تدرج عنابي-خوخي دافئ للبطاقات الرئيسية والهيدرات"
+    },
+    "Emerald Teal": {
+      "source": "img_396bdb6e40ac.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#013F4A",
+        "#068562"
+      ],
+      "description": "أخضر زمردي-سماوي عميق، فخامة الطبيعة"
+    },
+    "Pearl Grey": {
+      "source": "img_39fa48343c0a.jpg",
+      "category": "محايد (Neutral)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [],
+      "description": "تصميم إلهامي بتدرجات رمادية-بيضاء ناعمة (بدون أكواد)"
+    },
+    "Sky & Navy": {
+      "source": "img_4e353e03b673.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#021024",
+        "#052659",
+        "#5483B3",
+        "#7DA0CA",
+        "#C1E8FF"
+      ],
+      "description": "تدرج أزرق بحري من الظلام الدامس إلى السماء الصافية"
+    },
+    "Royal Purple": {
+      "source": "img_710512defea0.jpg",
+      "category": "دافئ (Warm)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#190019",
+        "#2B124C",
+        "#522B5B",
+        "#854F6C",
+        "#DFB6B2",
+        "#FBE4D8"
+      ],
+      "description": "تدرج بنفسجي ملكي من الأسود البنفسجي إلى الخوخي الفاتح"
+    },
+    "Lavender Mist": {
+      "source": "img_8d2c44e1f9fe.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#051960",
+        "#3C21B7",
+        "#591DA9",
+        "#78A3EB",
+        "#8B63DA",
+        "#CB98ED",
+        "#CFCBD2",
+        "#FBC2EB"
+      ],
+      "description": "تدرج خزامي بنفسجي-أزرق غني، 8 درجات من العميق للناعم"
+    },
+    "Ruby Noir": {
+      "source": "img_b06ad86dbdb1.jpg",
+      "category": "دافئ (Warm)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#02104F",
+        "#021C4F",
+        "#C50337"
+      ],
+      "description": "أحمر ياقوتي جريء مع خلفية زرقاء داكنة"
+    },
+    "Teal Rose": {
+      "source": "img_d0ad1fff5c4e.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#1E7883",
+        "#73D1D3",
+        "#DD528D"
+      ],
+      "description": "سماوي-فيروزي مع وردي جريء، تباين بارد-دافئ"
+    },
+    "Cerulean Depth": {
+      "source": "img_d338b3d827ec.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#02060E",
+        "#0356C5"
+      ],
+      "description": "أزرق نيلي عميق جداً مع لمسة زرقة ساطعة"
+    },
+    "Magenta Cosmos": {
+      "source": "img_eaffe779e28a.jpg",
+      "category": "دافئ (Warm)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#0D1E79",
+        "#D203DD"
+      ],
+      "description": "ماجنتا كهربائي مع خلفية زرقاء داكنة"
+    },
+    "Cyan Abyss": {
+      "source": "img_f7ac1a2ba1ea.jpg",
+      "category": "بارد (Cool)",
+      "type": "أساسي (Primary)",
+      "hex_colors": [
+        "#011C40",
+        "#023859",
+        "#26658C",
+        "#54ACBF",
+        "#A7EBF2"
+      ],
+      "description": "أزرق سيانيني من الهاوية إلى سطح المحيط"
+    }
+  },
+  "secondary": {
+    "Amber Dusk": {
+      "inspired_by": "Gold & Crimson",
+      "category": "دافئ (Warm)",
+      "hex_colors": [
+        "#3A100E",
+        "#7A2820",
+        "#BA4436",
+        "#DA6854",
+        "#F4B89A",
+        "#FAE0D4"
+      ]
+    },
+    "Forest Pine": {
+      "inspired_by": "Emerald Teal",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#021E14",
+        "#043C2A",
+        "#065E3E",
+        "#088254",
+        "#0AAA6C",
+        "#30D48A"
+      ]
+    },
+    "Midnight Blue": {
+      "inspired_by": "Sky & Navy",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#010812",
+        "#021C3A",
+        "#04346A",
+        "#0A50A2",
+        "#1870D4",
+        "#3092F4"
+      ]
+    },
+    "Orchid Velvet": {
+      "inspired_by": "Royal Purple",
+      "category": "دافئ (Warm)",
+      "hex_colors": [
+        "#0E0012",
+        "#220A32",
+        "#3A185A",
+        "#562C7E",
+        "#76489E",
+        "#9A6ABE"
+      ]
+    },
+    "Crimson Night": {
+      "inspired_by": "Ruby Noir",
+      "category": "دافئ (Warm)",
+      "hex_colors": [
+        "#0E0018",
+        "#2C0436",
+        "#4A0A54",
+        "#6E1272",
+        "#922090",
+        "#B43AAE"
+      ]
+    },
+    "Skyfall": {
+      "inspired_by": "Cerulean Depth",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#01030A",
+        "#021442",
+        "#042A7E",
+        "#0644BE",
+        "#0A62F2",
+        "#2A84FF"
+      ]
+    },
+    "Rose Mirage": {
+      "inspired_by": "Teal Rose",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#0E2E36",
+        "#1C5864",
+        "#2A8496",
+        "#3EB0C8",
+        "#5AD6E8",
+        "#88F0F8"
+      ]
+    },
+    "Ocean Foam": {
+      "inspired_by": "Cyan Abyss",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#010E22",
+        "#02204A",
+        "#043876",
+        "#0654A6",
+        "#0876DA",
+        "#1A9CF2"
+      ]
+    },
+    "Bronze Classic": {
+      "inspired_by": "Gold & Crimson",
+      "category": "دافئ (Warm)",
+      "hex_colors": [
+        "#1A0E06",
+        "#3A1E10",
+        "#5E321E",
+        "#824A2E",
+        "#A66642",
+        "#C8845A"
+      ]
+    },
+    "Sage Serenity": {
+      "inspired_by": "Emerald Teal",
+      "category": "بارد (Cool)",
+      "hex_colors": [
+        "#0A1814",
+        "#14322A",
+        "#1E4E40",
+        "#2A6C58",
+        "#368C72",
+        "#44AE8E"
+      ]
+    }
+  }
+}

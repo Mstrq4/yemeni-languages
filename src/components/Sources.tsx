@@ -1,77 +1,53 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Landmark,
-  Scroll,
-  BookOpen,
-  Library,
-  BookText,
-  type LucideIcon,
-} from "lucide-react";
+import { Landmark, Scroll, BookOpen, Library, BookText } from "lucide-react";
 import { sources } from "@/lib/data";
 
-const iconMap: Record<string, LucideIcon> = {
-  Landmark,
-  Scroll,
-  BookOpen,
-  Library,
-  BookText,
+const iconMap: Record<string, any> = {
+  Landmark, Scroll, BookOpen, Library, BookText,
 };
 
 export default function Sources() {
   return (
-    <section
-      id="sources"
-      className="py-16 sm:py-20 md:py-28 bg-stone-50 dark:bg-[#030712]"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="sources" className="py-16 sm:py-20 md:py-28 bg-stone-50 dark:bg-[#030712]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-10 sm:mb-12"
         >
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
             <span className="bg-gradient-to-l from-amber-400 to-amber-600 bg-clip-text text-transparent">
               مصادر المعرفة
             </span>
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-stone-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-stone-600 dark:text-stone-300 max-w-2xl mx-auto">
             خمس مصادر رئيسية تُغذّي معرفتنا باللغة اليمنية القديمة وحضارة اليمن
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {sources.map((source, idx) => {
-            const Icon = iconMap[source.icon] || BookOpen;
+          {sources.map((s: any, i: number) => {
+            const Icon = iconMap[s.icon] || BookOpen;
             return (
               <motion.div
-                key={source.title}
+                key={s.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ delay: i * 0.1 }}
                 className="group rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-stone-200 dark:border-white/10 p-5 sm:p-6 hover:border-amber-500 transition-colors flex flex-col shadow-sm"
               >
-                {/* Number badge */}
                 <div className="mb-4 flex items-center justify-between">
                   <div className="rounded-full bg-stone-100 dark:bg-white/5 border border-stone-200 dark:border-white/10 p-3 group-hover:border-amber-500 transition-colors">
                     <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-amber-500 dark:text-amber-400" />
                   </div>
-                  <span className="font-serif text-xl sm:text-2xl font-bold text-stone-300 dark:text-white/10">
-                    {idx + 1}
-                  </span>
+                  <span className="text-xl sm:text-2xl font-bold text-stone-300 dark:text-white/10">{i + 1}</span>
                 </div>
-
-                <h3 className="font-serif text-base sm:text-lg font-bold text-stone-900 dark:text-stone-50 mb-2">
-                  {source.title}
-                </h3>
-
-                <p className="text-xs leading-relaxed text-stone-600 dark:text-stone-300 flex-1">
-                  {source.description}
-                </p>
+                <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-50 mb-2">{s.title}</h3>
+                <p className="text-xs leading-relaxed text-stone-600 dark:text-stone-300 flex-1">{s.description}</p>
               </motion.div>
             );
           })}
